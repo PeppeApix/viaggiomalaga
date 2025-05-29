@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Mio Viaggio a Malaga</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Impostazioni generali */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(to bottom, #fefefe, #f0f8ff);
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to right, #ff5733, #ff8d1a);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            color: #fff;
+            margin: 0;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #ffeeba;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 300px;
+            background: url('malaga-hero.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Sezioni */
+        section {
+            padding: 100px 20px 40px;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+
+        section h2 {
+            font-size: 26px;
+            color: #ff5733;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ff8d1a;
+            display: inline-block;
+        }
+
+        section p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            max-width: 900px;
+            height: 480px;
+            border: none;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: #fff;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Pulsante di ritorno in alto */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff5733;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            background: #ff8d1a;
+        }
+
+        /* Stile per le tabelle statistiche */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #ff5733;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #ffeeba;
+        }
+
+        section h3 {
+            color: #ff8d1a;
+            margin-top: 25px;
+            font-size: 20px;
+        }
+
+        .formula-calcolo {
+            font-size: 0.8em;
+            color: #666;
+            display: block;
+            margin-top: 3px;
+        }
+
+        /* Stile per la sezione database */
+        #database {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid #ff5733;
+            margin: 40px auto;
+        }
+
+        #database pre {
+            background: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        #database code {
+            font-family: 'Courier New', monospace;
+        }
+
+        .db-example {
+            background-color: #fff8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* Media Queries per la responsività */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            header nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            section {
+                padding: 60px 10px 20px;
+            }
+
+            section h2 {
+                font-size: 22px;
+            }
+
+            section p {
+                font-size: 16px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .back-to-top {
+                bottom: 15px;
+                right: 15px;
+                font-size: 16px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            table th, table td {
+                padding: 8px;
+            }
+
+            #database {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Il Mio Viaggio a Malaga</h1>
+        <nav>
+            <ul>
+                <li><a href="#itinerario">Itinerario</a></li>
+                <li><a href="#galleria">Galleria</a></li>
+                <li><a href="#presentazione">Presentazione</a></li>
+                <li><a href="#cibo">Cibo Tipico</a></li>
+                <li><a href="#eventi">Eventi</a></li>
+                <li><a href="#curiosita">Curiosità</a></li>
+                <li><a href="#statistiche">Statistiche</a></li>
+                <li><a href="#html-explanation">HTML</a></li>
+                <li><a href="#client-server">Client-Server</a></li>
+                <li><a href="#database">Database</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h2>Benvenuti a Malaga: una città da scoprire!</h2>
+    </div>
+
+    <section id="itinerario">
+        <h2>Itinerario</h2>
+        <p>Scopri i luoghi che ho visitato durante il mio viaggio a Malaga. Una città ricca di cultura, storia e bellezza naturale.</p>
+        <iframe src="https://www.google.com/maps/d/embed?mid=14YPpFzm9MRbyUCfvBC4n6-6BcyO2s4s&ehbc=2E312F"></iframe>
+    </section>
+
+    <section id="galleria">
+        <h2>Galleria</h2>
+        <p>Queste sono alcune delle foto più belle che ho scattato durante il mio viaggio. Ogni immagine rappresenta un ricordo unico.</p>
+        <div class="gallery">
+            <img src="Alcazaba.jpg" alt="La bellissima Alcazaba">
+            <img src="Centro Històrico Màlaga.jpg" alt="Il centro storico di Malaga">
+            <img src="Setenil de Las Bodegas.jpg" alt="Setenil de Las Bodegas, un luogo magico">
+        </div>
+    </section>
+
+    <section id="presentazione">
+        <h2>Presentazione</h2>
+        <p>Questa presentazione racconta i momenti salienti del mio viaggio a Malaga, con immagini e dettagli dei luoghi visitati.</p>
+        <iframe src="Trip to malaga.pdf"></iframe>
+    </section>
+
+    <section id="cibo">
+        <h2>Cibo Tipico</h2>
+        <p>Malaga è famosa per la sua cucina deliziosa, che combina sapori mediterranei con influenze locali.</p>
+        <div class="gallery">
+            <img src="locas-estan-presentes-todas-pastelerias-malaguenas_98.jpg" alt="Pescaíto Frito - Pesce fritto tipico">
+            <img src="Cosa-Mangiare-a-Malaga-Gazpachuelo.jpg" alt="Gazpachuelo - Zuppa tradizionale">
+            <img src="chiringuito-especialidad.jpg" alt="Tarta Malagueña - Dolce locale">
+        </div>
+    </section>
+
+    <section id="eventi">
+        <h2>Eventi e Feste</h2>
+        <p>Malaga ospita eventi spettacolari durante tutto l'anno, come la famosa Feria di Malaga e le celebrazioni della Settimana Santa.</p>
+        <img src="Feria-de-Malaga-Malaga-Fair-4.jpg" alt="Feria di Malaga" style="width: 100%; border-radius: 8px;">
+    </section>
+
+    <section id="curiosita">
+        <h2>Curiosità su Malaga</h2>
+        <ul>
+            <li>Malaga è una delle città più antiche del mondo, fondata dai Fenici nel 770 a.C.</li>
+            <li>È la città natale di Pablo Picasso.</li>
+            <li>La spiaggia più lunga di Malaga è Playa de la Malagueta, ideale per rilassarsi.</li>
+        </ul>
+    </section>
+
+    <section id="statistiche">
+        <h2>Indagine Statistica sui Viaggi a Malaga</h2>
+        <p>Questa sezione presenta un'analisi dettagliata dei dati raccolti su 1000 viaggiatori che hanno visitato Malaga nell'ultimo anno.</p>
+        
+        <h3>Dati Demografici</h3>
+        <table id="tabella-demografici">
+            <tr>
+                <th>Origine</th>
+                <th>Frequenza Assoluta</th>
+                <th>Frequenza Relativa</th>
+                <th>Percentuale</th>
+            </tr>
+            <tr>
+                <td>Europa (esclusa Spagna)</td>
+                <td class="assoluta">400</td>
+                <td class="relativa">0.40</td>
+                <td class="percentuale">40%</td>
+            </tr>
+            <tr>
+                <td>Spagna</td>
+                <td class="assoluta">300</td>
+                <td class="relativa">0.30</td>
+                <td class="percentuale">30%</td>
+            </tr>
+            <tr>
+                <td>Altri Paesi</td>
+                <td class="assoluta">300</td>
+                <td class="relativa">0.30</td>
+                <td class="percentuale">30%</td>
+            </tr>
+            <tr>
+                <td><strong>Totale</strong></td>
+                <td class="assoluta">1000</td>
+                <td class="relativa">1.00</td>
+                <td class="percentuale">100%</td>
+            </tr>
+        </table>
+
+        <h3>Attività Preferite (risposte multiple)</h3>
+        <table id="tabella-attivita">
+            <tr>
+                <th>Attività</th>
+                <th>Frequenza Assoluta</th>
+                <th>Frequenza Relativa</th>
+                <th>Percentuale</th>
+            </tr>
+            <tr>
+                <td>Visita a musei e gallerie</td>
+                <td class="assoluta">600</td>
+                <td class="relativa">0.60</td>
+                <td class="percentuale">60%</td>
+            </tr>
+            <tr>
+                <td>Esplorazione spiagge</td>
+                <td class="assoluta">500</td>
+                <td class="relativa">0.50</td>
+                <td class="percentuale">50%</td>
+            </tr>
+            <tr>
+                <td>Partecipazione a eventi culturali</td>
+                <td class="assoluta">400</td>
+                <td class="relativa">0.40</td>
+                <td class="percentuale">40%</td>
+            </tr>
+            <tr>
+                <td>Degustazione cibo locale</td>
+                <td class="assoluta">700</td>
+                <td class="relativa">0.70</td>
+                <td class="percentuale">70%</td>
+            </tr>
+            <tr>
+                <td>Escursioni naturalistiche</td>
+                <td class="assoluta">350</td>
+                <td class="relativa">0.35</td>
+                <td class="percentuale">35%</td>
+            </tr>
+        </table>
+
+        <h3>Durata del Soggiorno</h3>
+        <table id="tabella-durata">
+            <tr>
+                <th>Giorni</th>
+                <th>Frequenza Assoluta</th>
+                <th>Frequenza Relativa</th>
+                <th>Percentuale</th>
+            </tr>
+            <tr>
+                <td>1-3 giorni</td>
+                <td class="assoluta">200</td>
+                <td class="relativa">0.20</td>
+                <td class="percentuale">20%</td>
+            </tr>
+            <tr>
+                <td>4-5 giorni</td>
+                <td class="assoluta">450</td>
+                <td class="relativa">0.45</td>
+                <td class="percentuale">45%</td>
+            </tr>
+            <tr>
+                <td>6-7 giorni</td>
+                <td class="assoluta">250</td>
+                <td class="relativa">0.25</td>
+                <td class="percentuale">25%</td>
+            </tr>
+            <tr>
+                <td>Più di 7 giorni</td>
+                <td class="assoluta">100</td>
+                <td class="relativa">0.10</td>
+                <td class="percentuale">10%</td>
+            </tr>
+            <tr>
+                <td><strong>Totale</strong></td>
+                <td class="assoluta">1000</td>
+                <td class="relativa">1.00</td>
+                <td class="percentuale">100%</td>
+            </tr>
+        </table>
+
+        <h3>Spesa Media Giornaliera</h3>
+        <table id="tabella-spesa">
+            <tr>
+                <th>Fascia di Spesa (€)</th>
+                <th>Frequenza Assoluta</th>
+                <th>Frequenza Relativa</th>
+                <th>Percentuale</th>
+            </tr>
+            <tr>
+                <td>Fino a 50€</td>
+                <td class="assoluta">150</td>
+                <td class="relativa">0.15</td>
+                <td class="percentuale">15%</td>
+            </tr>
+            <tr>
+                <td>51-100€</td>
+                <td class="assoluta">400</td>
+                <td class="relativa">0.40</td>
+                <td class="percentuale">40%</td>
+            </tr>
+            <tr>
+                <td>101-150€</td>
+                <td class="assoluta">300</td>
+                <td class="relativa">0.30</td>
+                <td class="percentuale">30%</td>
+            </tr>
+            <tr>
+                <td>Oltre 150€</td>
+                <td class="assoluta">150</td>
+                <td class="relativa">0.15</td>
+                <td class="percentuale">15%</td>
+            </tr>
+            <tr>
+                <td><strong>Totale</strong></td>
+                <td class="assoluta">1000</td>
+                <td class="relativa">1.00</td>
+                <td class="percentuale">100%</td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="video">
+        <h2>Video del Viaggio a Malaga</h2>
+        <p>Guarda il video che ho realizzato durante il mio viaggio a Malaga. Spero che ti piaccia!</p>
+        <video width="100%" height="480" controls>
+            <source src="Video malaga.mp4" type="video/mp4">
+            Il tuo browser non supporta il tag video.
+        </video>
+    </section>
+
+    <section id="html-explanation">
+        <h2>How This Website Was Built with HTML</h2>
+        
+        <h3>What is HTML?</h3>
+        <p>
+            <strong>HTML (HyperText Markup Language)</strong> is the standard language for creating web pages.  
+            It uses <em>tags</em> to structure content like headings, paragraphs, images, and links.  
+            For example:  
+        </p>
+        <pre><code>&lt;h1&gt;This is a Heading&lt;/h1&gt;
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;img src="photo.jpg" alt="A beautiful view"&gt;</code></pre>
+
+        <h3>Key HTML Features I Used</h3>
+        <ul>
+            <li>
+                <strong>Sections & Navigation:</strong> I organized content with <code>&lt;section&gt;</code> tags  
+                and linked them to the menu using <code>&lt;a href="#id"&gt;</code>.
+            </li>
+            <li>
+                <strong>Multimedia:</strong> I embedded a <code>&lt;video&gt;</code> of my trip and  
+                a Google Maps <code>&lt;iframe&gt;</code> for the itinerary.
+            </li>
+            <li>
+                <strong>Tables:</strong> The statistics section uses <code>&lt;table&gt;</code> to display data clearly.
+            </li>
+            <li>
+                <strong>CSS Styling:</strong> I added colors, fonts, and responsive design  
+                with <code>&lt;style&gt;</code> in the <code>&lt;head&gt;</code>.
+            </li>
+        </ul>
+
+        <h3>Why HTML Matters</h3>
+        <p>
+            Learning HTML helped me create this website from scratch.  
+            It's the foundation of all web development—combined with CSS and JavaScript,  
+            it brings designs to life!
+        </p>
+    </section>
+
+    <section id="client-server">
+        <h2>Architettura Client-Server</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center; margin-bottom: 30px;">
+            <div>
+                <h3>Come funziona questo sito web</h3>
+                <p>
+                    Questo sito utilizza il modello <strong>client-server</strong>, alla base di Internet:
+                </p>
+                <ul>
+                    <li><strong>Client</strong> (il tuo browser): Richiede e visualizza la pagina usando HTML/CSS/JavaScript.</li>
+                    <li><strong>Server</strong>: Memorizza i file del sito e li invia quando richiesto.</li>
+                    <li><strong>Protocollo HTTP/HTTPS</strong>: Il "linguaggio" usato per comunicare.</li>
+                </ul>
+                
+                <h3>Passaggi tecnici</h3>
+                <p>
+                    Quando hai aperto questa pagina:
+                </p>
+                <ol>
+                    <li>Il tuo browser <em>(client)</em> ha inviato una richiesta al server.</li>
+                    <li>Il server ha elaborato la richiesta e inviato i file HTML/CSS.</li>
+                    <li>Il browser ha interpretato il codice mostrandoti questa pagina.</li>
+                </ol>
+            </div>
+            
+            <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; text-align: center;">
+                <svg width="100%" viewBox="0 0 300 200" style="max-width: 400px;">
+                    <rect x="20" y="80" width="80" height="40" fill="#ff5733" rx="5"/>
+                    <text x="60" y="105" fill="white" text-anchor="middle" font-weight="bold">CLIENT</text>
+                    
+                    <rect x="200" y="80" width="80" height="40" fill="#ff8d1a" rx="5"/>
+                    <text x="240" y="105" fill="white" text-anchor="middle" font-weight="bold">SERVER</text>
+                    
+                    <line x1="100" y1="100" x2="180" y2="100" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+                    <polygon points="180,100 170,95 170,105" fill="#333"/>
+                    <text x="140" y="90" fill="#333" text-anchor="middle" font-size="12">Richiesta</text>
+                    
+                    <line x1="200" y1="120" x2="120" y2="120" stroke="#333" stroke-width="2"/>
+                    <polygon points="120,120 130,115 130,125" fill="#333"/>
+                    <text x="160" y="140" fill="#333" text-anchor="middle" font-size="12">Risposta</text>
+                </svg>
+                <p style="font-style: italic; margin-top: 10px;">Diagramma semplificato della comunicazione</p>
+            </div>
+        </div>
+
+        <div style="background-color: #fff8f0; padding: 20px; border-radius: 8px; border-left: 4px solid #ff8d1a;">
+            <h3>Differenze tra Frontend e Backend</h3>
+            <table style="width: 100%; margin-top: 15px;">
+                <tr>
+                    <th style="background-color: #ff5733; color: white; padding: 10px;">Frontend (Client)</th>
+                    <th style="background-color: #ff8d1a; color: white; padding: 10px;">Backend (Server)</th>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Ciò che vedi (HTML/CSS)</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Logica nascosta</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Eseguito nel browser</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Eseguito sul server</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Questo sito è statico (solo file)</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Siti dinamici usano PHP/Python/Node.js</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section id="database">
+        <h2>Database e Memoria dei Dati</h2>
+        
+        <div class="db-example">
+            <h3>Cosa sono i Database?</h3>
+            <p>
+                Un <strong>database</strong> è un sistema organizzato per archiviare, gestire e recuperare informazioni. 
+                Nel contesto web, i database memorizzano tutti i dati dinamici di un sito.
+            </p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                <div>
+                    <h4>Esempi di dati che potrei memorizzare:</h4>
+                    <ul>
+                        <li>Recensioni dei visitatori su Malaga</li>
+                        <li>Prenotazioni per tour guidati</li>
+                        <li>Statistiche aggiornate sui turisti</li>
+                        <li>Preferenze degli utenti</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Vantaggi dei database:</h4>
+                    <ul>
+                        <li>Dati organizzati e facilmente accessibili</li>
+                        <li>Possibilità di aggiornamenti in tempo reale</li>
+                        <li>Sicurezza e backup delle informazioni</li>
+                        <li>Ricerca e filtraggio efficiente</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h3>Tipi di Database</h3>
+        <table style="width: 100%; margin: 20px 0;">
+            <tr>
+                <th style="background-color: #ff5733; color: white; padding: 10px;">Tipo</th>
+                <th style="background-color: #ff5733; color: white; padding: 10px;">Descrizione</th>
+                <th style="background-color: #ff5733; color: white; padding: 10px;">Esempi</th>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Relazionali</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Dati organizzati in tabelle collegate</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">MySQL, PostgreSQL</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>NoSQL</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Dati non strutturati o semi-strutturati</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">MongoDB, Firebase</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><strong>Memoria locale</strong></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Dati salvati direttamente nel browser</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">LocalStorage, IndexedDB</td>
+            </tr>
+        </table>
+
+        <div class="db-example">
+            <h3>Esempio Pratico per Questo Sito</h3>
+            <p>Anche se questo sito è statico, potrei implementare un database per:</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h4>Struttura Tabella "Recensioni"</h4>
+                    <pre>
+CREATE TABLE recensioni (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50),
+    email VARCHAR(100),
+    valutazione INT,
+    commento TEXT,
+    data_inserimento DATETIME
+);</pre>
+                </div>
+                <div>
+                    <h4>Query di Esempio</h4>
+                    <pre>
+-- Inserire una nuova recensione
+INSERT INTO recensioni 
+(nome, email, valutazione, commento, data_inserimento)
+VALUES 
+('Mario Rossi', 'mario@example.com', 5, 
+ 'Bellissima città! Tornerò sicuramente', NOW());
+
+-- Recuperare le recensioni migliori
+SELECT * FROM recensioni 
+WHERE valutazione >= 4 
+ORDER BY data_inserimento DESC 
+LIMIT 5;</pre>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <h3>Database nel Mondo Reale</h3>
+            <p>I siti turistici come Tripadvisor utilizzano database complessi per:</p>
+            <ul>
+                <li>Memorizzare milioni di recensioni</li>
+                <li>Gestire prenotazioni di hotel e voli</li>
+                <li>Personalizzare le ricerche in base alle preferenze</li>
+                <li>Analizzare i trend del turismo</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Il Mio Viaggio a Malaga</p>
+    </footer>
+
+    <button class="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">↑</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const totaleOsservazioni = 1000;
+            
+            function aggiornaCella(cellaAssoluta, cellaRelativa, cellaPercentuale) {
+                const assoluta = parseInt(cellaAssoluta.textContent);
+                const relativa = (assoluta / totaleOsservazioni).toFixed(2);
+                const percentuale = (relativa * 100).toFixed(0) + '%';
+                
+                cellaRelativa.innerHTML = `${relativa} <span class="formula-calcolo">${assoluta} / ${totaleOsservazioni}</span>`;
+                cellaPercentuale.innerHTML = `${percentuale} <span class="formula-calcolo">${relativa} × 100</span>`;
+            }
+            
+            document.querySelectorAll('table[id^="tabella-"]').forEach(tabella => {
+                const righe = tabella.querySelectorAll('tr:not(:first-child)');
+                
+                righe.forEach(riga => {
+                    const assoluta = riga.querySelector('.assoluta');
+                    const relativa = riga.querySelector('.relativa');
+                    const percentuale = riga.querySelector('.percentuale');
+                    
+                    if (assoluta && relativa && percentuale) {
+                        aggiornaCella(assoluta, relativa, percentuale);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

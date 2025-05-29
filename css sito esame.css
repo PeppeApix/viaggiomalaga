@@ -1,0 +1,32 @@
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff5733;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, transform 0.3s ease; /* Aggiunta della transizione */
+}
+
+.back-to-top:hover {
+    background: #ff8d1a;
+    transform: scale(1.1); /* Effetto di ingrandimento al passaggio del mouse */
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    opacity: 0; /* Inizialmente invisibile */
+    transition: opacity 0.5s ease; /* Transizione per l'opacità */
+}
+
+.gallery img.loaded {
+    opacity: 1; /* Diventa visibile quando caricato */
+}
